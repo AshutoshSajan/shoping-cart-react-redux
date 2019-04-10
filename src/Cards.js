@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import uuid from './uuid';
 import { connect } from 'react-redux'
-import Header from './Header';
 
 
 class Card extends Component {
@@ -21,28 +20,12 @@ class Card extends Component {
     return filteredData;
   }
 
-  sortProduct = (data) => {
-    let sort;
-    const products = this.props.product.data
-
-    if(data == "Select"){
-      sort = [...products];
-    }else if (data == "Lowest to highest"){
-      sort = products.sort((a, b) => a.price - b.price)
-    }else if (data == "Highest to lowest"){
-      sort = products.sort((a, b) => b.price - a.price)
-    }
-    console.log(sort)
-    this.setState({sortedProduct: sort})
-  }
-
   render() {
     console.log(this.props, "props in cards");
     const { data } = this.props.product;
     const filtered = this.createFiltered(data);
     return (
       <React.Fragment>
-        <Header filtered={filtered} sortProduct={this.sortProduct} />
         { 
           filtered.map(v => {
             return (
@@ -78,7 +61,7 @@ function MapToState(state) {
 }
 export default connect(MapToState) (Card);
 
-{/*this.state.sortedProduct) ? (this.state.sortedProduct) : "" */}
+// {/*this.state.sortedProduct) ? (this.state.sortedProduct) : "" */}
 
 
 // { data.map((v,i) => console.log(v)) }

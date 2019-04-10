@@ -36,17 +36,22 @@ export function Product (state = [], action) {
 		case "ADD_PRODUCT":
 			return {data: action.data, loading: action.loading, isOpen: action.isOpen}
 		case "TOGGLE_CART":
-			var newObj = Object.create(state)
-			newObj.isOpen = !action.data;
-			return newObj;
+			const cartObj = Object.create(state)
+			cartObj.isOpen = !action.data;
+			return cartObj;
 		case "OPEN_CART":
-			var newObj = Object.create(state)
-			newObj.isOpen = action.data;
-			return newObj;
+			const openCart = Object.create(state)
+			openCart.isOpen = action.data;
+			return openCart;
 		case "ADD_TO_CART":
 			// var newObj = Object.create(state)
 			// newObj.isOpen = action.data;
 			return state;
+		case "SORT_PRODUCT":
+			const sortProduct = Object.create(state)
+			sortProduct.data = action.sorted;
+			return sortProduct
+			// console.log(state,"state", action.sorted, "action data");cart
 		default:
 			return state;
 	}

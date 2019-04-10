@@ -5,6 +5,7 @@ import Size from './Size';
 import Cards from './Cards';
 import Cart from './Cart';
 import { connect } from 'react-redux'
+import Header from './Header';
 
 class Main extends React.Component {
     state = {
@@ -28,6 +29,24 @@ class Main extends React.Component {
                 isOpen : false,
             })
         ))
+    }
+
+    sortProduct = (data) => {
+        let sort;
+        // const original = [...this.props.data.Product.data];
+        const products = [...this.props.data.Product.data]
+        console.log(products, "product in sort")
+      
+        if(data === "Select"){
+          sort = products
+        }else if (data === "Lowest to highest"){
+          sort = [...products].sort((a, b) => a.price - b.price)
+        }else if (data === "Highest to lowest"){
+          sort = [...products].sort((a, b) => b.price - a.price)
+        }
+        console.log(sort, data , "sorted array")
+        this.props.dispatch({type: "SORT_PRODUCT", sorted: sort})
+        // this.setState({sortedProduct: sort})
     }
 
     addToCart = (id) => {
@@ -76,7 +95,9 @@ class Main extends React.Component {
     render() {
         console.log(this.props);
         console.log(this.state, "main js state");
-        const {Product} = this.props.data;
+        // const { product } = this.props.data;
+
+        // console.log(products)
         // Product.loading ? console.log("yup") : console.log("nope")
         // setTimeout(() => this.setState({className: "internet-error"}), 1000);
         return(
@@ -88,6 +109,7 @@ class Main extends React.Component {
                     <Size handleFilter={this.handleFilter} handleFilterSize={this.handleFilterSize} />
                     <div className="cards-section">
                         <div className="card">
+                            <Header filtered={""} sortProduct={this.sortProduct} />
                             <Cards addToCart={this.addToCart} openCart={this.openCart} />
                         </div>
                     </div>
