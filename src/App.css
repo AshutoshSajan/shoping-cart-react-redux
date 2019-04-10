@@ -185,21 +185,28 @@
 	overflow-y: scroll;
 }
 
-.close{
-	transform: translateX(100%);
-}
-
 .cart-btn {
 	background: #111;
 	border-radius: 0;
-	position: fixed;
-	display: block;
+	position: absolute;
+	display: inline-block;
 	padding: 10px;
-	/* margin-right: 200px; */
-	z-index: 100;
-	right: 450px;
+	right: 0;
 	top: 0;
 	/* transform: translateX(-100%); */
+	transition: all 10s ease-out;	
+}
+
+.drag_left {
+	transform: translateX(-450px);
+	/* right: 450px; */
+}
+.drag_right {
+	transform: translateX(0)
+}
+
+.close{
+	transform: translateX(100%);
 }
 
 .fas, .close-btn {
