@@ -26,6 +26,7 @@ class Card extends Component {
     return (
       <React.Fragment>
         <Header filtered={filtered} sortProduct={this.props.sortProduct} />
+        <div className="all_Cards">
         { 
           filtered.map(v => {
             return (
@@ -47,6 +48,7 @@ class Card extends Component {
               <p className="add-to-cart">Add to Cart</p>
             </div>)
           })}
+        </div>
       </React.Fragment>
     )
   }

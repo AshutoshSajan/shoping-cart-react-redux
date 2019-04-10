@@ -21,13 +21,13 @@ class Cart extends React.Component {
 						{
 							Product.isOpen ?
 								<span className="close-btn">X</span> :
-								<div>
+								<div className="button">
 									<i className="fas fa-cart-plus"></i>
 									<span className="product-quantity">{cart.length}</span>
 								</div>
 						}
 					</button>
-					<div className={`cart ${Product.isOpen ? "open" : "close"}`}>
+					<div className={`cart ${Product.isOpen ? "open-cart" : "close"}`}>
 
 						<div className="cart-header">
 							<div>
