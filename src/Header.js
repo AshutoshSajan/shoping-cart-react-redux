@@ -1,13 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux'
 
 class Header extends React.Component {
 
 	render(){
-    console.log(this.props, "props in header");
 		return (
 			<header className="product-header">
-				<p>{`${this.props.filtered.length} Product(s) found.`}</p>
+				<p>{`${ this.props.filtered ? this.props.filtered.length : 0} Product(s) found.`}</p>
 				<div className="sort-product">
 					<p>Order by</p>
 					<select className="select-input" onChange={(e) => this.props.sortProduct(e.target.value)}>
@@ -23,7 +21,3 @@ class Header extends React.Component {
 
 
 export default Header;
-
-// key="1"
-// key="1"
-// key="1"

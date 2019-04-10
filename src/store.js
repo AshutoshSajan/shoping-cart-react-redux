@@ -1,14 +1,10 @@
-import React from 'react';
 import { combineReducers, createStore } from 'redux';
-import { size, Product, filter, cart } from './reducer';
+import { size, Product, cart } from './reducer';
 
 const rootReducer = combineReducers({
 	size,
 	Product,
-	filter,
-	cart
+	cart,
 })
 
-export const store = createStore(rootReducer);
-
-console.log(store)
+export const store = createStore(rootReducer)

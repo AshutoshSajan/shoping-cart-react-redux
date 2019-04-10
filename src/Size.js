@@ -10,26 +10,14 @@ class Size extends React.Component {
 	}
 
 	handleFilterSize = (data) => {
-		console.log(data)
 		this.props.dispatch({
 			type: "TOGGLE_SIZE",
 			data: data
 		})
 	}
 
-	// handleFilter = (data, size) => {
-	// 	console.log(data,size, "filter")
-	// 	this.props.dispatch({
-	// 		type: "HANDLE_FILTER",
-	// 		data: data,
-	// 		size: size
-	// 	})
-	// }
-
 	render(){
-		console.log(this.props)
 		const { data } = this.props;
-		console.log(data);
 		return (
 			<section className="sizes">
 				<h2>Sizes:</h2>
@@ -38,7 +26,6 @@ class Size extends React.Component {
 						data.size.map(size => 
 						<div className={`circle ${size.checked ? "active" : "inactive"}`} key={uuid()} onClick={() => { 
 							this.handleFilterSize(size); 
-							// this.handleFilter(data, size);
 						} }>
 							<span className="circle-txt">{size.size}</span>
 						</div>

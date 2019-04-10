@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import uuid from './uuid';
-import { connect } from 'react-redux'
-
+import { connect } from 'react-redux';
+import Header from './Header';
 
 class Card extends Component {
   
@@ -16,20 +16,20 @@ class Card extends Component {
     let filteredData = data.filter(pro =>{
       return pro.availableSizes.some(size => filteredSizes.length ?  (filteredSizes.includes(size)): size );
     })
-    // console.log('createFiltered',filteredSizes)
     return filteredData;
   }
 
+
   render() {
-    console.log(this.props, "props in cards");
     const { data } = this.props.product;
     const filtered = this.createFiltered(data);
     return (
       <React.Fragment>
+        <Header filtered={filtered} sortProduct={this.props.sortProduct} />
         { 
           filtered.map(v => {
             return (
-              <div className="product" key={uuid()} onClick={() => {this.props.openCart(); this.props.addToCart(v.id)} }>
+              <div className="product" key={uuid()} onClick={() => {this.props.openCart(); this.props.addToCart(v)} }>
               <p className="shipping">Free shipping</p>
               <figure className="img-box">
                 <img src={`https://raw.githubusercontent.com/jeffersonRibeiro/react-shopping-cart/master/src/static/products/${v.sku}_1.jpg`} alt="product_img"/>
@@ -53,7 +53,6 @@ class Card extends Component {
 }
 
 function MapToState(state) {
-  console.log(state)
   return {
     product: state.Product,
     sizes: state.size 
@@ -62,7 +61,6 @@ function MapToState(state) {
 export default connect(MapToState) (Card);
 
 // {/*this.state.sortedProduct) ? (this.state.sortedProduct) : "" */}
-
 
 // { data.map((v,i) => console.log(v)) }
   

@@ -9,29 +9,7 @@ export function size (state = [], action) {
 	}
 }
 
-// case "HANDLE_FILTER":
-// 			return [...state,(action.data.Product.data).filter(v => 
-// 			{	console.log(v)
-// 				return (!v.availableSizes.includes(size.size))
-// 			})];
-
-export function filter (state = [], action) {
-	// console.log(state, action, "filter reducer")
-	switch (action.type) {
-		case "HANDLE_FILTER":
-			console.log(state,size);
-			return (action.data.Product.data).filter(v => 
-			{
-				return (!v.availableSizes.includes(size.size))
-			});
-		default:
-			return state;
-	}
-}
-
 export function Product (state = [], action) {
-	// console.log(state, action , "products")
-
 	switch (action.type) {
 		case "ADD_PRODUCT":
 			return {data: action.data, loading: action.loading, isOpen: action.isOpen}
@@ -43,25 +21,41 @@ export function Product (state = [], action) {
 			const openCart = Object.create(state)
 			openCart.isOpen = action.data;
 			return openCart;
-		case "ADD_TO_CART":
-			// var newObj = Object.create(state)
-			// newObj.isOpen = action.data;
-			return state;
 		case "SORT_PRODUCT":
 			const sortProduct = Object.create(state)
 			sortProduct.data = action.sorted;
 			return sortProduct
-			// console.log(state,"state", action.sorted, "action data");cart
 		default:
 			return state;
 	}
 }
 
+function add(state, data){
+	var temp = true;
+	state.forEach(obj => {
+		if(obj.product.id === data.id){
+			obj.quant = obj.quant + 1;
+			temp = false;
+		}
+		return null;
+		});
+		if (temp){
+			const obj = {
+				product : data,
+				quant: 1
+			}
+			state.push(obj)
+		}
+	return [...state]
+}
+
 export function cart (state = [], action) {
-	// console.log(state, action , "cart")
 	switch (action.type) {
-		case "TOGGLE":
-			// return action.state.isOpen = !action.state.isOpen;
+		case "ADD_TO_CART":
+			return add(state, action.data);
+		case "REMOVE_FROM_CART":
+			console.log('remove cart');
+			return state.filter(v => v.product.id !== action.id);
 		default:
 			return state;
 	}
